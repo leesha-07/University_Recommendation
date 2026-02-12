@@ -3,12 +3,14 @@ University Recommendation API
 Flask REST API for university recommendations.
 """
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from recommendation_engine import UniversityRecommender
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, 
+            template_folder='templates',
+            static_folder='static')
 CORS(app)
 
 # Initialize recommender
@@ -19,19 +21,9 @@ recommender = UniversityRecommender(data_path)
 @app.route('/')
 def home():
     """
-    API home endpoint with information about available endpoints.
+    Serve the main HTML page for the University Recommendation System.
     """
-    return jsonify({
-        'message': 'University Recommendation API',
-        'version': '1.0.0',
-        'endpoints': {
-            '/': 'API information',
-            '/api/universities': 'Get all universities (supports filtering)',
-            '/api/recommend': 'Get personalized recommendations (POST)',
-            '/api/countries': 'Get list of all countries',
-            '/api/stats': 'Get dataset statistics'
-        }
-    })
+    return render_template('index.html')
 
 
 @app.route('/api/universities', methods=['GET'])
