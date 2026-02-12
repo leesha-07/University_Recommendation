@@ -222,7 +222,7 @@ h3 {
     border-color: var(--danger-color);
 }
 
-.form-input:valid {
+.form-input:valid:not(:placeholder-shown) {
     border-color: var(--success-color);
 }
 

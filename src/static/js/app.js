@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Set up "Select All" functionality
     setupSelectAll();
+    
+    // Set up form validation enhancement
+    setupFormValidation();
 });
 
 // ===================================
@@ -512,8 +515,7 @@ function searchAgain() {
 // Form Validation Enhancement
 // ===================================
 
-// Add real-time validation feedback
-document.addEventListener('DOMContentLoaded', () => {
+function setupFormValidation() {
     const inputs = document.querySelectorAll('.form-input');
     
     inputs.forEach(input => {
@@ -531,4 +533,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-});
+}
