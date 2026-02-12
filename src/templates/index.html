@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find your perfect university match based on GPA, budget, test scores, and preferences">
+    <title>University Recommendation System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">🎓 University Recommendation System</h1>
+            <p class="header-subtitle">Find Your Perfect University Match</p>
+            <p class="header-description">
+                Get personalized university recommendations based on your academic profile, budget, and preferences. 
+                Our smart algorithm analyzes hundreds of universities worldwide to find your ideal matches.
+            </p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Input Form Section -->
+            <section id="form-section" class="form-section">
+                <div class="section-header">
+                    <h2>Tell Us About Yourself</h2>
+                    <p>Fill in your academic profile to get personalized recommendations</p>
+                </div>
+
+                <form id="recommendation-form" class="recommendation-form">
+                    <!-- Academic Information -->
+                    <div class="form-group">
+                        <label for="gpa" class="form-label">Your GPA <span class="required">*</span></label>
+                        <input type="number" id="gpa" name="gpa" class="form-input" 
+                               min="0" max="4.0" step="0.01" placeholder="e.g., 3.5" required>
+                        <small class="form-help">On a 4.0 scale</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget" class="form-label">Maximum Budget (USD) <span class="required">*</span></label>
+                        <input type="number" id="budget" name="budget" class="form-input" 
+                               min="0" placeholder="e.g., 40000" required>
+                        <small class="form-help">Annual tuition fee you can afford</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="test_score" class="form-label">Test Score (SAT) <span class="required">*</span></label>
+                        <input type="number" id="test_score" name="test_score" class="form-input" 
+                               min="400" max="1600" placeholder="e.g., 1400" required>
+                        <small class="form-help">If you have GRE, convert: (Verbal + Quant) ÷ 340 × 1600</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ielts_score" class="form-label">IELTS Score <span class="required">*</span></label>
+                        <input type="number" id="ielts_score" name="ielts_score" class="form-input" 
+                               min="0" max="9" step="0.5" placeholder="e.g., 7.0" required>
+                        <small class="form-help">International English Language Testing System score</small>
+                    </div>
+
+                    <!-- Preferred Countries -->
+                    <div class="form-group">
+                        <label class="form-label">Preferred Countries <span class="required">*</span></label>
+                        <small class="form-help">Select all countries you're interested in</small>
+                        <div class="checkbox-group" id="countries-container">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="select-all-countries" class="checkbox-input">
+                                <span class="checkbox-text select-all">Select All</span>
+                            </label>
+                            <!-- Countries will be dynamically loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Preferred Sectors -->
+                    <div class="form-group">
+                        <label class="form-label">Preferred Fields of Study</label>
+                        <small class="form-help">Select your areas of interest (optional)</small>
+                        <div class="checkbox-group" id="sectors-container">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="select-all-sectors" class="checkbox-input">
+                                <span class="checkbox-text select-all">Select All</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Engineering" class="checkbox-input">
+                                <span class="checkbox-text">Engineering</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Computer Science" class="checkbox-input">
+                                <span class="checkbox-text">Computer Science</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Technology" class="checkbox-input">
+                                <span class="checkbox-text">Technology</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Business" class="checkbox-input">
+                                <span class="checkbox-text">Business</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Medicine" class="checkbox-input">
+                                <span class="checkbox-text">Medicine</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Law" class="checkbox-input">
+                                <span class="checkbox-text">Law</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Science" class="checkbox-input">
+                                <span class="checkbox-text">Science</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Arts" class="checkbox-input">
+                                <span class="checkbox-text">Arts</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Humanities" class="checkbox-input">
+                                <span class="checkbox-text">Humanities</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Physics" class="checkbox-input">
+                                <span class="checkbox-text">Physics</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Mathematics" class="checkbox-input">
+                                <span class="checkbox-text">Mathematics</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sector" value="Chemistry" class="checkbox-input">
+                                <span class="checkbox-text">Chemistry</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Form Buttons -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-text">Get My Recommendations</span>
+                        </button>
+                        <button type="button" id="clear-btn" class="btn btn-secondary">
+                            Clear Form
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Tips Section -->
+                <div class="tips-section">
+                    <h3>💡 Tips for Better Results</h3>
+                    <ul>
+                        <li>Be realistic with your GPA and test scores</li>
+                        <li>Consider selecting multiple countries to see more options</li>
+                        <li>Your budget should include tuition only (not living expenses)</li>
+                        <li>If you're flexible on majors, don't select any sectors to see all options</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Loading Section -->
+            <section id="loading-section" class="loading-section hidden">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Finding your perfect matches...</p>
+                <p class="loading-subtext">Analyzing hundreds of universities worldwide</p>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="results-section hidden">
+                <div class="results-header">
+                    <h2 id="results-title">Your University Matches</h2>
+                    <button id="search-again-btn" class="btn btn-secondary">
+                        Search Again
+                    </button>
+                </div>
+
+                <div id="results-container" class="results-container">
+                    <!-- University cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <div id="error-message" class="error-message hidden">
+                <span class="error-icon">⚠️</span>
+                <p id="error-text"></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <strong>University Recommendation System</strong> | 
+                Searching through 100+ universities across 18+ countries
+            </p>
+            <p class="footer-subtext">
+                Data updated regularly. Results are recommendations only. Please verify with official university sources.
+            </p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
