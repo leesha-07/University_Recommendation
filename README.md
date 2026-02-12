@@ -81,7 +81,18 @@ The API will be available at `http://localhost:5000`
 You should see output like:
 ```
  * Running on http://127.0.0.1:5000
- * Debug mode: on
+```
+
+**Note**: By default, the application runs with debug mode disabled for security. To enable debug mode during development, set the `FLASK_DEBUG` environment variable:
+
+```bash
+# On Linux/macOS
+export FLASK_DEBUG=true
+python src/app.py
+
+# On Windows
+set FLASK_DEBUG=true
+python src/app.py
 ```
 
 ## API Documentation
